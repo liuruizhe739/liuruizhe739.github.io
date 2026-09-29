@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YourName · Developer</title>
+<meta name="description" content="YourName 的个人主页 —— 全栈开发者 / 开源爱好者">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-soft: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-soft: rgba(88, 166, 255, .12);
+    --radius: 14px;
+    --maxw: 880px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f6f8fa;
+      --border: #d0d7de;
+      --text: #1f2328;
+      --muted: #656d76;
+      --accent: #0969da;
+      --accent-soft: rgba(9, 105, 218, .1);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 20px 60px;
+  }
+
+  .container { max-width: var(--maxw); margin: 0 auto; }
+
+  /* ---------- 顶部：头像 + 简介 ---------- */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 72px 0 40px;
+    flex-wrap: wrap;
+  }
+
+  .avatar {
+    width: 116px;
+    height: 116px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: transform .35s ease, border-color .35s ease;
+  }
+  .avatar:hover { transform: scale(1.06) rotate(-3deg); border-color: var(--accent); }
+
+  .hero-text { flex: 1; min-width: 240px; }
+
+  .hero-text h1 {
+    font-size: 2rem;
+    letter-spacing: -.02em;
+    margin-bottom: 6px;
+  }
+
+  .hero-text .role {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-text p { color: var(--muted); font-size: .95rem; }
+
+  /* ---------- 社交链接 ---------- */
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-soft);
+    color: var(--text);
+    text-decoration: none;
+    font-size: .85rem;
+    transition: all .2s ease;
+  }
+
+  .socials a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- 通用区块 ---------- */
+  section { margin-top: 48px; }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .section-title::before {
+    content: "";
+    width: 4px;
+    height: 18px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  /* ---------- 技能标签 ---------- */
+  .tags { display: flex; flex-wrap: wrap; gap: 9px; }
+
+  .tags span {
+    padding: 5px 13px;
+    font-size: .83rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid transparent;
+    transition: all .2s ease;
+  }
+
+  .tags span:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+
+  /* ---------- 项目卡片 ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    display: block;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+    text-decoration: none;
+    color: inherit;
+    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+  }
+
+  .card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+
+  .card p {
+    font-size: .87rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .card .meta {
+    display: flex;
+    gap: 14px;
+    font-size: .78rem;
+    color: var(--muted);
+  }
+
+  /* ---------- 页脚 ---------- */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: .82rem;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width: 560px) {
+    .hero { padding-top: 48px; gap: 20px; }
+    .avatar { width: 88px; height: 88px; }
+    .hero-text h1 { font-size: 1.55rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 个人信息 ========== -->
+  <header class="hero">
+    <img class="avatar" src="https://github.com/yourname.png" alt="头像">
+    <div class="hero-text">
+      <h1>YourName</h1>
+      <div class="role">全栈开发者 · 开源爱好者</div>
+      <p>专注于 Web 应用与开发者工具，喜欢把复杂问题拆成简单的模块。<br>目前正在探索 Rust 与 LLM 应用开发。</p>
+
+      <nav class="socials">
+        <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:your.email@example.com">Email</a>
+        <a href="https://twitter.com/yourname" target="_blank" rel="noopener">Twitter</a>
+        <a href="https://yourblog.com" target="_blank" rel="noopener">博客</a>
+        <a href="./resume.pdf" target="_blank" rel="noopener">简历</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== 关于我 ========== -->
+  <section>
+    <h2 class="section-title">关于我</h2>
+    <p style="color: var(--muted); font-size: .95rem;">
+      5 年 Web 开发经验，参与过从 0 到 1 的产品搭建，也维护过百万级 DAU 的服务。
+      相信好的代码应该像好的文档一样易读，热衷于把踩过的坑写成文章分享出去。
+    </p>
+  </section>
+
+  <!-- ========== 技能栈 ========== -->
+  <section>
+    <h2 class="section-title">技能栈</h2>
+    <div class="tags">
+      <span>TypeScript</span>
+      <span>JavaScript</span>
+      <span>React</span>
+      <span>Vue 3</span>
+      <span>Next.js</span>
+      <span>Node.js</span>
+      <span>NestJS</span>
+      <span>Python</span>
+      <span>Go</span>
+      <span>PostgreSQL</span>
+      <span>Redis</span>
+      <span>Docker</span>
+      <span>Kubernetes</span>
+      <span>CI/CD</span>
+    </div>
+  </section>
+
+  <!-- ========== 项目 ========== -->
+  <section>
+    <h2 class="section-title">精选项目</h2>
+    <div class="grid">
+
+      <a class="card" href="https://github.com/yourname/project-one" target="_blank" rel="noopener">
+        <h3>project-one</h3>
+        <p>一个基于 React + Node.js 的开源低代码平台，支持拖拽生成表单与流程。</p>
+        <div class="meta">
+          <span>⭐ 1.2k</span>
+          <span>TypeScript</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/yourname/project-two" target="_blank" rel="noopener">
+        <h3>project-two</h3>
+        <p>轻量级请求库，支持拦截器、重试与缓存，体积仅 2KB。</p>
+        <div class="meta">
+          <span>⭐ 680</span>
+          <span>JavaScript</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/yourname/project-three" target="_blank" rel="noopener">
+        <h3>project-three</h3>
+        <p>基于 Go 的高性能 API 网关，支持动态路由与限流熔断。</p>
+        <div class="meta">
+          <span>⭐ 430</span>
+          <span>Go</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://github.com/yourname/project-four" target="_blank" rel="noopener">
+        <h3>project-four</h3>
+        <p>命令行效率工具集合，一键生成项目模板与常用配置文件。</p>
+        <div class="meta">
+          <span>⭐ 210</span>
+          <span>Python</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ========== 页脚 ========== -->
+  <footer>
+    <p>© <span id="year"></span> YourName · Built with ❤️ and GitHub Pages</p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
